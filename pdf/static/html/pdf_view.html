@@ -1,20 +1,21 @@
+{% load i18n %}
 <div class="pdf_block">
   <h2>{{ display_name }}</h2>
   <object data="{{ url }}" type="application/pdf" width="100%" height="600">
     <p>
-      Vous ne semblez pas avoir de quoi visualiser un PDF dans votre navigateur…
+      {% trans "It appears you don't have a PDF plugin for this browser." %}
     </p>
   </object>
   {% if allow_download or source_url != "" %}
   <ul>
     {% if allow_download %}
     <li class="pdf-download-button">
-      <a href="{{ url }}" download>Télécharger le fichier PDF</a>
+      <a href="{{ url }}" download>{% trans "Download the PDF" %}</a>
     </li>
     {% endif %}
     {% if source_url != "" %}
     <li class="pdf-download-button">
-      <a href="{{ source_url }}" download>{% if source_text == "" %}Télécharger le fichier source{% else %}{{ source_text }}{% endif %}</a>
+      <a href="{{ source_url }}" download>{% if source_text == "" %}{% trans "Download the source document" %}{% else %}{{ source_text }}{% endif %}</a>
     </li>
     {% endif %}
   </ul>
