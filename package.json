@@ -15,10 +15,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IONISx/xblock-pdf.git"
+    "url": "git+https://github.com/open-craft/xblock-pdf.git"
   },
   "bugs": {
-    "url": "https://github.com/IONISx/xblock-pdf/issues"
+    "url": "https://github.com/open-craft/xblock-pdf/issues"
   },
-  "homepage": "https://github.com/IONISx/xblock-pdf#readme"
+  "homepage": "https://github.com/open-craft/xblock-pdf#readme"
 }

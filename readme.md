@@ -1,6 +1,6 @@
 # xblock-pdf
 
-[![Build Status](https://circleci.com/gh/IONISx/xblock-pdf.svg?style=svg)](https://circleci.com/gh/IONISx/xblock-pdf)
+[![Build Status](https://circleci.com/gh/open-craft/xblock-pdf.svg?style=svg)](https://circleci.com/gh/open-craft/xblock-pdf)
 
 > Course component (Open edX XBlock) that provides an easy way to embed a PDF
 
@@ -23,7 +23,7 @@ Add it to the `EDXAPP_EXTRA_REQUIREMENTS` variable.
 
 ```yml
 EDXAPP_EXTRA_REQUIREMENTS:
-  - name: 'git+https://github.com/IONISx/xblock-pdf.git@v1.0.0#egg=xblock-pdf'
+  - name: 'git+https://github.com/open-craft/xblock-pdf.git@v1.0.0#egg=xblock-pdf'
 ```
 
 Then run your deployment playbooks.
