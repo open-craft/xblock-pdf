@@ -18,6 +18,7 @@
       <span class="tip setting-help">{% trans "The URL for your PDF." %}</span>
     </li>
 
+    {% if not disable_all_download %}
     <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
         <label class="label setting-label" for="pdf_edit_allow_download">{% trans "PDF Download Allowed" %}</label>
@@ -40,6 +41,7 @@
       </div>
       <span class="tip setting-help">{% trans "Add a download link for the source file of your PDF. Use it for example to provide the PowerPoint file used to create this PDF." %}</span>
     </li>
+    {% endif %}
 
   </ul>
 
