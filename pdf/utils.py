@@ -18,6 +18,4 @@ def is_all_download_disabled():
     """
     Check if all download is disabled or not
     """
-    return bool_from_str(
-        getattr(settings, 'PDFXBLOCK_DISABLE_ALL_DOWNLOAD', 'False')
-    )
+    return getattr(settings, 'PDFXBLOCK_DISABLE_ALL_DOWNLOAD', False)
