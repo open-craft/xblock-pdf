@@ -44,6 +44,14 @@ Go to `Settings -> Advanced Settings` and set `advanced_modules` to `["pdf"]`.
 
 Select `Advanced -> PDF` in your unit.
 
+### Custom Configurations
+
+Below is a table of custom django settings configurations that can be used with the xblock.
+
+| Configuration | Description |
+|---- |---- |
+| `PDFXBLOCK_DISABLE_ALL_DOWNLOAD` | Disables all downloadables (download pdf/source) in the XBlock if set to `True`. Overrides all custom download pdf options set in Studio, without overwriting them.
+
 ## Development environment
 
 For the code quality environment, you need to install both Python and JavaScript requirements.
