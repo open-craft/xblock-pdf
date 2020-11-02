@@ -7,6 +7,11 @@ from xblock.core import XBlock
 from xblock.fields import Scope, String, Boolean
 from xblock.fragment import Fragment
 
+from pdf.utils import (
+    bool_from_str,
+    is_all_download_disabled,
+)
+
 
 class PdfBlock(XBlock):
 
@@ -85,6 +90,7 @@ class PdfBlock(XBlock):
             'display_name': self.display_name,
             'url': self.url,
             'allow_download': self.allow_download,
+            'disable_all_download': is_all_download_disabled(),
             'source_text': self.source_text,
             'source_url': self.source_url
         }
@@ -111,6 +117,7 @@ class PdfBlock(XBlock):
             'display_name': self.display_name,
             'url': self.url,
             'allow_download': self.allow_download,
+            'disable_all_download': is_all_download_disabled(),
             'source_text': self.source_text,
             'source_url': self.source_url
         }
@@ -140,7 +147,7 @@ class PdfBlock(XBlock):
         """
         self.display_name = data['display_name']
         self.url = data['url']
-        self.allow_download = True if data['allow_download'] == "True" else False  # Str to Bool translation
+        self.allow_download = bool_from_str(data['allow_download'])
         self.source_text = data['source_text']
         self.source_url = data['source_url']
 

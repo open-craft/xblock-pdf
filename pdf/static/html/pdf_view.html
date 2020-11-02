@@ -6,7 +6,7 @@
       {% trans "It appears you don't have a PDF plugin for this browser." %}
     </p>
   </object>
-  {% if allow_download or source_url != "" %}
+  {% if not disable_all_download %}
   <ul>
     {% if allow_download %}
     <li class="pdf-download-button">
