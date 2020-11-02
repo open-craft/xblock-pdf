@@ -147,9 +147,11 @@ class PdfBlock(XBlock):
         """
         self.display_name = data['display_name']
         self.url = data['url']
-        self.allow_download = bool_from_str(data['allow_download'])
-        self.source_text = data['source_text']
-        self.source_url = data['source_url']
+        
+        if not is_all_download_disabled():
+            self.allow_download = bool_from_str(data['allow_download'])
+            self.source_text = data['source_text']
+            self.source_url = data['source_url']
 
         return {
             'result': 'success',
