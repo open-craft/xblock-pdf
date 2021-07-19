@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-19 16:52+0200\n"
+"PO-Revision-Date: 2021-07-19 16:54+0200\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 3.0\n"
+
+#: pdf/pdf.py:27
+msgid "Display Name"
+msgstr ""
+
+#: pdf/pdf.py:28
+msgid "PDF"
+msgstr ""
+
+#: pdf/pdf.py:30 pdf/templates/html/pdf_edit.html:10
+msgid "This name appears in the horizontal navigation at the top of the page."
+msgstr ""
+
+#: pdf/pdf.py:34 pdf/templates/html/pdf_edit.html:15
+msgid "PDF URL"
+msgstr ""
+
+#: pdf/pdf.py:35
+msgid "https://tutorial.math.lamar.edu/pdf/Trig_Cheat_Sheet.pdf"
+msgstr ""
+
+#: pdf/pdf.py:37 pdf/templates/html/pdf_edit.html:18
+msgid "The URL for your PDF."
+msgstr ""
+
+#: pdf/pdf.py:41 pdf/templates/html/pdf_edit.html:24
+msgid "PDF Download Allowed"
+msgstr ""
+
+#: pdf/pdf.py:44 pdf/templates/html/pdf_edit.html:30
+msgid "Display a download button for this PDF."
+msgstr ""
+
+#: pdf/pdf.py:48 pdf/templates/html/pdf_edit.html:35
+msgid "Source document button text"
+msgstr ""
+
+#: pdf/pdf.py:52 pdf/pdf.py:62 pdf/templates/html/pdf_edit.html:42
+msgid ""
+"Add a download link for the source file of your PDF. Use it for example to "
+"provide the PowerPoint file used to create this PDF."
+msgstr ""
+
+#: pdf/pdf.py:58 pdf/templates/html/pdf_edit.html:39
+msgid "Source document URL"
+msgstr ""
+
+#: pdf/templates/html/pdf_edit.html:7
+msgid "Name"
+msgstr ""
+
+#: pdf/templates/html/pdf_edit.html:26
+msgid "True"
+msgstr ""
+
+#: pdf/templates/html/pdf_edit.html:27
+msgid "False"
+msgstr ""
+
+#: pdf/templates/html/pdf_edit.html:36
+msgid "Default : Download the source document"
+msgstr ""
+
+#: pdf/templates/html/pdf_edit.html:51
+msgid "Save"
+msgstr ""
+
+#: pdf/templates/html/pdf_edit.html:54
+msgid "Cancel"
+msgstr ""
+
+#: pdf/templates/html/pdf_view.html:6
+msgid "It appears you don't have a PDF plugin for this browser."
+msgstr ""
+
+#: pdf/templates/html/pdf_view.html:13
+msgid "Download the PDF"
+msgstr ""
+
+#: pdf/templates/html/pdf_view.html:18
+msgid "Download the source document"
+msgstr ""
