@@ -23,8 +23,8 @@
       <div class="wrapper-comp-setting">
         <label class="label setting-label" for="pdf_edit_allow_download">{% trans "PDF Download Allowed" %}</label>
         <select class="input setting-input" id="pdf_edit_allow_download">
-          <option value="True" {% if allow_download %}selected{% endif %}>True</option>
-          <option value="False" {% if not allow_download %}selected{% endif %}>False</option>
+          <option value="True" {% if allow_download %}selected{% endif %}>{% trans "True" %}</option>
+          <option value="False" {% if not allow_download %}selected{% endif %}>{% trans "False" %}</option>
         </select>
       </div>
       <span class="tip setting-help">{% trans "Display a download button for this PDF." %}</span>
@@ -33,7 +33,7 @@
     <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
         <label class="label setting-label" for="pdf_edit_source_text">{% trans "Source document button text" %}</label>
-        <input class="input setting-input" id="pdf_edit_source_text" value="{{ source_text }}" type="text" placeholder="Default : Download the source document">
+        <input class="input setting-input" id="pdf_edit_source_text" value="{{ source_text }}" type="text" placeholder="{% trans 'Default : Download the source document' %}">
       </div>
       <div class="wrapper-comp-setting">
         <label class="label setting-label" for="pdf_edit_source_url">{% trans "Source document URL" %}</label>
