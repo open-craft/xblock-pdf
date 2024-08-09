@@ -3,15 +3,13 @@
   "description": "Course component (Open edX XBlock) that provides an easy way to embed a PDF",
   "private": true,
   "scripts": {
-    "test": "grunt test"
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
   "devDependencies": {
-    "grunt": "1.3.0",
-    "grunt-contrib-jshint": "2.1.0",
-    "grunt-flake8": "0.1.3",
-    "grunt-jscs": "3.0.1",
-    "load-grunt-tasks": "5.1.0",
-    "time-grunt": "2.0.0"
+    "@eslint/js": "^9.8.0",
+    "eslint": "^9.8.0",
+    "globals": "^15.9.0"
   },
   "repository": {
     "type": "git",
