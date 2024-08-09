@@ -6,7 +6,8 @@ from xblock.fields import Boolean, Scope, String
 from xblock.fragment import Fragment
 from xblock.utils.resources import ResourceLoader
 
-from .utils import DummyTranslationService, _, bool_from_str, is_all_download_disabled
+
+from .utils import DummyTranslationService, _, bool_from_str, is_all_download_disabled, convert_to_pdf, GOTENBERG_HOST
 
 try:
     import importlib_resources
@@ -71,7 +72,7 @@ class PdfBlock(XBlock):
         """
         Gets the content of a resource
         """
-        resource = importlib_resources.files(__name__).joinpath(resource_path)
+        resource = importlib_resources.files("pdf").joinpath(resource_path)
         return resource.read_text("utf-8")
 
     def render_template(self, template_path, context=None):
@@ -127,7 +128,8 @@ class PdfBlock(XBlock):
             'allow_download': self.allow_download,
             'disable_all_download': is_all_download_disabled(),
             'source_text': self.source_text,
-            'source_url': self.source_url
+            'source_url': self.source_url,
+            'enable_conversion': GOTENBERG_HOST is not None,
         }
         html = loader.render_django_template(
             'templates/html/pdf_edit.html',
@@ -151,6 +153,18 @@ class PdfBlock(XBlock):
         }
         self.runtime.publish(self, event_type, event_data)
 
+    def _generate_pdf_from_source(self):
+        """
+        Uses the Gotenberg API to convert the source document to a PDF.
+        """
+        output_path = "{loc.org}/{loc.course}/{loc.block_type}/{loc.block_id}.pdf".format(
+            loc=self.location  # pylint: disable=no-member
+        )
+        return convert_to_pdf(
+            self.source_url,
+            output_path,
+        )
+
     @XBlock.json_handler
     def save_pdf(self, data, suffix=''):  # pylint: disable=unused-argument
         """
@@ -163,6 +177,9 @@ class PdfBlock(XBlock):
             self.allow_download = bool_from_str(data['allow_download'])
             self.source_text = data['source_text']
             self.source_url = data['source_url']
+            if data['source_url'] and bool_from_str(data['pdf_auto_generate']):
+                pdf_path = self._generate_pdf_from_source()
+                self.url = pdf_path
 
         return {
             'result': 'success',

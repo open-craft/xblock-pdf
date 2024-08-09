@@ -11,7 +11,8 @@ function pdfXBlockInitEdit(runtime, element) {
             'url': $('#pdf_edit_url').val(),
             'allow_download': $('#pdf_edit_allow_download').val() || '',
             'source_text': $('#pdf_edit_source_text').val() || '',
-            'source_url': $('#pdf_edit_source_url').val() || ''
+            'source_url': $('#pdf_edit_source_url').val() || '',
+            'pdf_auto_generate': $('#pdf_auto_generate').val() || '',
         };
 
         runtime.notify('save', { state: 'start' });

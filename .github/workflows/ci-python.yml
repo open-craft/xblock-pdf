@@ -24,7 +24,7 @@ jobs:
         python-version: 3.8
 
     - name: Install Dependencies
-      run: pip install .[]
+      run: pip install .[quality]
 
     - name: Run linting
-      run: pytest pdf
+      run: pylint pdf
