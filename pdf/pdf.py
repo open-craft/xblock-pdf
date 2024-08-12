@@ -4,8 +4,6 @@ from django.template import Context, Template
 from xblock.core import XBlock
 from xblock.fields import Boolean, Scope, String
 from xblock.fragment import Fragment
-from xblock.utils.resources import ResourceLoader
-
 
 from .utils import DummyTranslationService, _, bool_from_str, is_all_download_disabled, convert_to_pdf, GOTENBERG_HOST
 
@@ -13,6 +11,12 @@ try:
     import importlib_resources
 except ImportError:
     import importlib.resources as importlib_resources
+
+try:
+    from xblock.utils.resources import ResourceLoader
+except ImportError:
+    from xblockutils.resources import ResourceLoader
+
 
 loader = ResourceLoader(__name__)
 
