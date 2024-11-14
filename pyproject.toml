@@ -7,7 +7,7 @@ name = "xblock-pdf"
 dynamic = ["version"]
 description = "Course component (Open edX XBlock) that provides an easy way to embed a PDF"
 readme = "README.md"
-license = ""
+license = {file = "LICENSE"}
 dependencies = [
     "XBlock",
     "xblock-utils",
