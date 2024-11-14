@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "xblock-pdf"
+dynamic = ["version"]
+description = "Course component (Open edX XBlock) that provides an easy way to embed a PDF"
+readme = "README.md"
+license = {file = "LICENSE"}
+dependencies = [
+    "XBlock",
+    "xblock-utils",
+    "importlib-resources; python_version < '3.9'",
+]
+
+[project.optional-dependencies]
+quality = [
+    "xblock-pdf[test]",
+    "edx-lint",
+    "isort",
+    "pycodestyle",
+    "pydocstyle",
+]
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-django",
+    "xblock-sdk",
+]
+
+[project.entry-points."xblock.v1"]
+pdf = "pdf.pdf:PdfBlock"
+
+[tool.hatch.version]
+path = "pdf/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "pdf",
+]

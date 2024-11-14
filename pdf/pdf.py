@@ -1,28 +1,35 @@
 """ pdfXBlock main Python class"""
 
-import pkg_resources
 from django.template import Context, Template
-
 from xblock.core import XBlock
-from xblock.fields import Scope, String, Boolean
+from xblock.fields import Boolean, Scope, String
 from xblock.fragment import Fragment
-from xblockutils.resources import ResourceLoader
-from .utils import _, bool_from_str, DummyTranslationService, is_all_download_disabled
+
+from .utils import DummyTranslationService, _, bool_from_str, is_all_download_disabled, convert_to_pdf, GOTENBERG_HOST
+
+try:
+    import importlib_resources
+except ImportError:
+    import importlib.resources as importlib_resources
+
+try:
+    from xblock.utils.resources import ResourceLoader
+except ImportError:
+    from xblockutils.resources import ResourceLoader
+
 
 loader = ResourceLoader(__name__)
 
 
 @XBlock.needs('i18n')
 class PdfBlock(XBlock):
-
-    '''
+    """
     Icon of the XBlock. Values : [other (default), video, problem]
-    '''
+    """
     icon_class = "other"
+    editable_fields = ('display_name', 'url', 'allow_download', 'source_text', 'source_url')
 
-    '''
-    Fields
-    '''
+    # Fields
     display_name = String(
         display_name=_("Display Name"),
         default=_("PDF"),
@@ -50,7 +57,7 @@ class PdfBlock(XBlock):
         scope=Scope.content,
         help=_(
             "Add a download link for the source file of your PDF. "
-             "Use it for example to provide the PowerPoint file used to create this PDF."
+            "Use it for example to provide the PowerPoint file used to create this PDF."
         )
     )
 
@@ -60,30 +67,28 @@ class PdfBlock(XBlock):
         scope=Scope.content,
         help=_(
             "Add a download link for the source file of your PDF. "
-             "Use it for example to provide the PowerPoint file used to create this PDF."
+            "Use it for example to provide the PowerPoint file used to create this PDF."
         )
     )
 
-    '''
-    Util functions
-    '''
+    # Util functions
     def load_resource(self, resource_path):
         """
         Gets the content of a resource
         """
-        resource_content = pkg_resources.resource_string(__name__, resource_path)
-        return resource_content.decode("utf8")
+        resource = importlib_resources.files("pdf").joinpath(resource_path)
+        return resource.read_text("utf-8")
 
-    def render_template(self, template_path, context={}):
+    def render_template(self, template_path, context=None):
         """
         Evaluate a template by resource path, applying the provided context
         """
+        if context is None:
+            context = {}
         template_str = self.load_resource(template_path)
         return Template(template_str).render(Context(context))
 
-    '''
-    Main functions
-    '''
+    # Main functions
     def student_view(self, context=None):
         """
         The primary view of the XBlock, shown to students
@@ -115,6 +120,7 @@ class PdfBlock(XBlock):
         frag.initialize_js('pdfXBlockInitView')
         return frag
 
+
     def studio_view(self, context=None):
         """
         The secondary view of the XBlock, shown to teachers
@@ -126,7 +132,8 @@ class PdfBlock(XBlock):
             'allow_download': self.allow_download,
             'disable_all_download': is_all_download_disabled(),
             'source_text': self.source_text,
-            'source_url': self.source_url
+            'source_url': self.source_url,
+            'enable_conversion': GOTENBERG_HOST is not None,
         }
         html = loader.render_django_template(
             'templates/html/pdf_edit.html',
@@ -139,7 +146,7 @@ class PdfBlock(XBlock):
         return frag
 
     @XBlock.json_handler
-    def on_download(self, data, suffix=''):
+    def on_download(self, data, suffix=''):  # pylint: disable=unused-argument
         """
         The download file event handler
         """
@@ -150,8 +157,20 @@ class PdfBlock(XBlock):
         }
         self.runtime.publish(self, event_type, event_data)
 
+    def _generate_pdf_from_source(self):
+        """
+        Uses the Gotenberg API to convert the source document to a PDF.
+        """
+        output_path = "{loc.org}/{loc.course}/{loc.block_type}/{loc.block_id}.pdf".format(
+            loc=self.location  # pylint: disable=no-member
+        )
+        return convert_to_pdf(
+            self.source_url,
+            output_path,
+        )
+
     @XBlock.json_handler
-    def save_pdf(self, data, suffix=''):
+    def save_pdf(self, data, suffix=''):  # pylint: disable=unused-argument
         """
         The saving handler.
         """
@@ -162,6 +181,9 @@ class PdfBlock(XBlock):
             self.allow_download = bool_from_str(data['allow_download'])
             self.source_text = data['source_text']
             self.source_url = data['source_url']
+            if data['source_url'] and bool_from_str(data['pdf_auto_generate']):
+                pdf_path = self._generate_pdf_from_source()
+                self.url = pdf_path
 
         return {
             'result': 'success',
@@ -173,5 +195,4 @@ class PdfBlock(XBlock):
         i18n_service = self.runtime.service(self, "i18n")
         if i18n_service:
             return i18n_service
-        else:
-            return DummyTranslationService()
+        return DummyTranslationService()

@@ -1,0 +1,27 @@
+name: JavaScript CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches:
+    - '**'
+
+
+jobs:
+  run_tests:
+    name: linting
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Run linting
+      run: npm run lint

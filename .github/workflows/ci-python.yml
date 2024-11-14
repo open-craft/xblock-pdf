@@ -1,0 +1,30 @@
+name: Python CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches:
+    - '**'
+
+
+jobs:
+  run_tests:
+    name: linting
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: setup python
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.8
+
+    - name: Install Dependencies
+      run: pip install .[quality]
+
+    - name: Run linting
+      run: pylint pdf

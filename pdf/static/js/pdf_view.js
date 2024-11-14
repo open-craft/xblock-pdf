@@ -1,4 +1,5 @@
 /* Javascript for pdfXBlock. */
+// eslint-disable-next-line no-unused-vars
 function pdfXBlockInitView(runtime, element) {
     /* Weird behaviour :
      * In the LMS, element is the DOM container.
@@ -10,7 +11,7 @@ function pdfXBlockInitView(runtime, element) {
 
     $(function () {
         element.find('.pdf-download-button').on('click', function () {
-            var handlerUrl = runtime.handlerUrl(element, 'on_download');
+            const handlerUrl = runtime.handlerUrl(element, 'on_download');
             $.post(handlerUrl, '{}');
         });
     });

@@ -2,3 +2,4 @@
 .envrc
 .direnv/
 node_modules/
+xblock_pdf.egg-info/
