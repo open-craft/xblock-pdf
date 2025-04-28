@@ -1,11 +1,9 @@
 {% load i18n %}
 <div class="pdf_block">
   <h2>{{ display_name }}</h2>
-  <object data="{{ url }}" type="application/pdf" width="100%" height="600">
-    <p>
-      {% trans "It appears you don't have a PDF plugin for this browser." %}
-    </p>
-  </object>
+  <iframe src="{{ url }}" type="application/pdf" width="100%" height="600">
+
+  </iframe>
   {% if not disable_all_download %}
   <ul>
     {% if allow_download %}
