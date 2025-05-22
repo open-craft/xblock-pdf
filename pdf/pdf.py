@@ -6,7 +6,7 @@ from django.template import Context, Template
 from xblock.core import XBlock
 from xblock.fields import Scope, String, Boolean
 from xblock.fragment import Fragment
-from xblockutils.resources import ResourceLoader
+from xblock.utils.resources import ResourceLoader
 from .utils import _, bool_from_str, DummyTranslationService, is_all_download_disabled
 
 loader = ResourceLoader(__name__)
