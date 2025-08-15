@@ -27,7 +27,7 @@ class PdfBlock(XBlock):
     Icon of the XBlock. Values : [other (default), video, problem]
     """
     icon_class = "other"
-    editable_fields = ('display_name', 'url', 'allow_download', 'source_text', 'source_url')
+    editable_fields = ('display_name', 'url', 'source_text', 'source_url')
 
     # Fields
     display_name = String(
@@ -42,13 +42,6 @@ class PdfBlock(XBlock):
         default=_("https://tutorial.math.lamar.edu/pdf/Trig_Cheat_Sheet.pdf"),
         scope=Scope.content,
         help=_("The URL for your PDF.")
-    )
-
-    allow_download = Boolean(
-        display_name=_("PDF Download Allowed"),
-        default=True,
-        scope=Scope.content,
-        help=_("Display a download button for this PDF.")
     )
 
     source_text = String(
@@ -97,7 +90,6 @@ class PdfBlock(XBlock):
         context = {
             'display_name': self.display_name,
             'url': self.url,
-            'allow_download': self.allow_download,
             'disable_all_download': is_all_download_disabled(),
             'source_text': self.source_text,
             'source_url': self.source_url,
@@ -129,7 +121,6 @@ class PdfBlock(XBlock):
         context = {
             'display_name': self.display_name,
             'url': self.url,
-            'allow_download': self.allow_download,
             'disable_all_download': is_all_download_disabled(),
             'source_text': self.source_text,
             'source_url': self.source_url,
@@ -144,18 +135,6 @@ class PdfBlock(XBlock):
         frag.add_javascript(self.load_resource("static/js/pdf_edit.js"))
         frag.initialize_js('pdfXBlockInitEdit')
         return frag
-
-    @XBlock.json_handler
-    def on_download(self, data, suffix=''):  # pylint: disable=unused-argument
-        """
-        The download file event handler
-        """
-        event_type = 'edx.pdf.downloaded'
-        event_data = {
-            'url': self.url,
-            'source_url': self.source_url,
-        }
-        self.runtime.publish(self, event_type, event_data)
 
     def _generate_pdf_from_source(self):
         """
@@ -178,7 +157,6 @@ class PdfBlock(XBlock):
         self.url = data['url']
 
         if not is_all_download_disabled():
-            self.allow_download = bool_from_str(data['allow_download'])
             self.source_text = data['source_text']
             self.source_url = data['source_url']
             if data['source_url'] and bool_from_str(data['pdf_auto_generate']):

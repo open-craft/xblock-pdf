@@ -8,11 +8,6 @@
   </object>
   {% if not disable_all_download %}
   <ul>
-    {% if allow_download %}
-    <li class="pdf-download-button">
-      <a href="{{ url }}" download>{% trans "Download the PDF" %}</a>
-    </li>
-    {% endif %}
     {% if source_url != "" %}
     <li class="pdf-download-button">
       <a href="{{ source_url }}" download>{% if source_text == "" %}{% trans "Download the source document" %}{% else %}{{ source_text }}{% endif %}</a>

@@ -9,7 +9,6 @@ function pdfXBlockInitEdit(runtime, element) {
         const data = {
             'display_name': $('#pdf_edit_display_name').val(),
             'url': $('#pdf_edit_url').val(),
-            'allow_download': $('#pdf_edit_allow_download').val() || '',
             'source_text': $('#pdf_edit_source_text').val() || '',
             'source_url': $('#pdf_edit_source_url').val() || '',
             'pdf_auto_generate': $('#pdf_auto_generate').val() || '',
