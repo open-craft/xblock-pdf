@@ -10,7 +10,8 @@
   <ul>
     {% if allow_download %}
     <li class="pdf-download-button">
-      <a href="{{ url }}" download>{% trans "Download the PDF" %}</a>
+      <a href="{{ url }}" target="_blank" rel="noopener" download>{% trans "Download the PDF" %}</a>
+      (Right click or long press on the download link and select the "Save as" option to download. Clicking on the link might open it in a tab.)
     </li>
     {% endif %}
     {% if source_url != "" %}

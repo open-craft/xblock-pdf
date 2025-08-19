@@ -21,13 +21,13 @@
     {% if not disable_all_download %}
     <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
-        <label class="label setting-label" for="pdf_edit_allow_download">{% trans "PDF Download Allowed" %}</label>
+        <label class="label setting-label" for="pdf_edit_allow_download">{% trans "Show PDF download link" %}</label>
         <select class="input setting-input" id="pdf_edit_allow_download">
           <option value="True" {% if allow_download %}selected{% endif %}>{% trans "True" %}</option>
           <option value="False" {% if not allow_download %}selected{% endif %}>{% trans "False" %}</option>
         </select>
       </div>
-      <span class="tip setting-help">{% trans "Display a download button for this PDF." %}</span>
+      <span class="tip setting-help">{% trans "Display a download link to this PDF for convenience. Please note that even if this is disabled, the embedded PDF viewer may still display its own download button." %}</span>
     </li>
 
     <li class="field comp-setting-entry is-set">
